@@ -143,3 +143,10 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SWAGGER_SETTINGS = {
+    "API_TITLE": os.environ.get("API_TITLE", "API"),
+    "API_VERSION": os.environ.get("API_VERSION", "1.0.0"),
+    "SWAGGER_ENABLED": os.environ.get("SWAGGER_ENABLED", False),
+    "SWAGGER_URL": os.environ.get("SWAGGER_URL", "/api/docs"),
+}

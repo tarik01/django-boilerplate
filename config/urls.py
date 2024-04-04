@@ -17,7 +17,28 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from django import settings
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
 ]
+
+if settings.SWAGGER_SETTINGS['SWAGGER_ENABLED']:
+    schema_view = get_schema_view(
+    openapi.Info(
+        title=settings.SWAGGER_SETTINGS['API_TITLE'],
+        default_version=settings.SWAGGER_SETTINGS['API_VERSION'],
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+    )
+
+    urlpatterns += [
+        path(
+            settings.SWAGGER_SETTINGS['SWAGGER_URL'],
+        )
+    ]
