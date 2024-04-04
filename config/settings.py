@@ -54,7 +54,7 @@ INSTALLED_APPS += [
 # Apps
 INSTALLED_APPS += [
     # "apps.users", #
-] 
+]
 
 
 MIDDLEWARE = [
