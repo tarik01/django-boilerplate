@@ -15,13 +15,12 @@ from pathlib import Path
 
 from dotenv import find_dotenv, load_dotenv
 
-# Find the correct .env file based on the current environment
-env_file = find_dotenv(f'.env.{os.getenv("ENV", "development")}')
-load_dotenv(env_file)
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Find the correct .env file based on the current environment
+env_file = find_dotenv(f'{BASE_DIR}/env/{os.getenv("ENV", "development")}.env')
+load_dotenv(env_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -45,15 +44,17 @@ INSTALLED_APPS = [
     "django.db.backends.postgresql",
 ]
 
+# Third libraries
 INSTALLED_APPS += [
     "dotenv",
     "rest_framework",
     "rest_framework.authtoken",
 ]
 
+# Apps
 INSTALLED_APPS += [
-    "apps.user",
-]
+    # "apps.users", #
+] 
 
 
 MIDDLEWARE = [
