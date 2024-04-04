@@ -39,6 +39,6 @@ if settings.SWAGGER_SETTINGS['SWAGGER_ENABLED']:
 
     urlpatterns += [
         path(
-            settings.SWAGGER_SETTINGS['SWAGGER_URL'],
+            settings.SWAGGER_SETTINGS['SWAGGER_URL'], schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui')
         )
     ]
