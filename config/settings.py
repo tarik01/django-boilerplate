@@ -50,7 +50,7 @@ INSTALLED_APPS += [
     "dotenv",
     "rest_framework",
     "rest_framework.authtoken",
-    "drf_yasg",
+    "drf_spectacular",
 ]
 
 # Apps
@@ -147,9 +147,11 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-SWAGGER_SETTINGS = {
-    "API_TITLE": os.environ.get("API_TITLE", "API"),
-    "API_VERSION": os.environ.get("API_VERSION", "1.0.0"),
+SPECTACULAR_SETTINGS = {
+    "TITLE": os.environ.get("API_TITLE", "API"),
+    "VERSION": os.environ.get("API_VERSION", "1.0.0"),
+    "DESCRIPTION": os.environ.get("API_DESCRIPTION", "API"),
+    "SERVE_INCLUDE_SCHEMA": os.environ.get("SWAGGER_INCLUDE_SCHEMA", False),
     "SWAGGER_ENABLED": os.environ.get("SWAGGER_ENABLED", False),
-    "SWAGGER_URL": os.environ.get("SWAGGER_URL", "/api/docs"),
+    "SWAGGER_URL": os.environ.get("SWAGGER_URL", "api/docs/"),
 }

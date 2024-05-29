@@ -15,31 +15,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django import settings
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path
-from drf_yasg import openapi
-from drf_yasg.views import get_schema_view
-from rest_framework import permissions
+from drf_spectacular.views import SpectacularSwaggerView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
 ]
 
-if settings.SWAGGER_SETTINGS["SWAGGER_ENABLED"]:
-    schema_view = get_schema_view(
-        openapi.Info(
-            title=settings.SWAGGER_SETTINGS["API_TITLE"],
-            default_version=settings.SWAGGER_SETTINGS["API_VERSION"],
-        ),
-        public=True,
-        permission_classes=(permissions.AllowAny,),
-    )
-
+if settings.SPECTACULAR_SETTINGS["SWAGGER_ENABLED"]:
     urlpatterns += [
         path(
-            settings.SWAGGER_SETTINGS["SWAGGER_URL"],
-            schema_view.with_ui("swagger", cache_timeout=0),
-            name="schema-swagger-ui",
-        )
+            settings.SPECTACULAR_SETTINGS["SWAGGER_URL"],
+            SpectacularSwaggerView.as_view(url_name="schema"),
+            name="swagger-ui",
+        ),
     ]
