@@ -18,7 +18,7 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
-from drf_spectacular.views import SpectacularSwaggerView
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -26,6 +26,11 @@ urlpatterns = [
 
 if settings.SPECTACULAR_SETTINGS["SWAGGER_ENABLED"]:
     urlpatterns += [
+        path(
+            settings.SPECTACULAR_SETTINGS["SWAGGER_SCHEMA_URL"],
+            SpectacularAPIView.as_view(),
+            name="schema",
+        ),
         path(
             settings.SPECTACULAR_SETTINGS["SWAGGER_URL"],
             SpectacularSwaggerView.as_view(url_name="schema"),
